@@ -44,6 +44,10 @@ class SliderButton extends StatefulWidget {
 
   final bool disable;
 
+  ///to hide the slider set this to true
+  ///to always show the slider set this to false
+  final bool dismissable;
+
   SliderButton({
     required this.action,
     this.radius = 100,
@@ -64,6 +68,7 @@ class SliderButton extends StatefulWidget {
     this.icon,
     this.dismissThresholds = 0.75,
     this.disable = false,
+    this.dismissable = true,
   }) : assert((buttonSize ?? 60) <= (height));
 
   @override
@@ -81,7 +86,9 @@ class _SliderButtonState extends State<SliderButton> {
 
   @override
   Widget build(BuildContext context) {
-    return flag == true ? _control() : Container();
+    return flag == true || widget.dismissable == false
+        ? _control()
+        : Container();
   }
 
   Widget _control() => Container(
